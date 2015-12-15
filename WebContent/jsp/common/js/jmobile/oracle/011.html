@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="GBK">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>权限管理 (DCL) 语句</title>
+	<link rel="stylesheet" href="../css/themes/default/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+	<script src="../js/jquery.js"></script>
+	<script src="../_assets/js/index.js"></script>
+	<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>权限管理 (DCL) 语句</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p></p><br>
+<p>1.GRANT    赋于权限
+<p>常用的系统权限集合有以下三个:
+<p>CONNECT(基本的连接), RESOURCE(程序开发), DBA(数据库管理)
+<p>常用的数据对象权限有以下五个:
+<p>ALL     ON 数据对象名,     SELECT ON 数据对象名,     UPDATE ON 数据对象名,
+<p>DELETE     ON 数据对象名,  INSERT ON 数据对象名,   ALTER  ON 数据对象名
+
+<p><p>GRANT CONNECT, RESOURCE TO 用户名;
+<p>GRANT SELECT ON 表名 TO 用户名;
+<p>GRANT SELECT, INSERT, DELETE ON表名 TO 用户名1, 用户名2;
+
+</p><br>
+<p>2.REVOKE 回收权限
+
+<p>REVOKE CONNECT, RESOURCE FROM 用户名;
+<p>REVOKE SELECT ON 表名 FROM 用户名;
+<p>REVOKE SELECT, INSERT, DELETE ON表名 FROM 用户名1, 用户名2;
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>广告</h4>
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+
+</body>
+</html>

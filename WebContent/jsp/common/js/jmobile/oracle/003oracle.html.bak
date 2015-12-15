@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="GBK">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Oracle 函数</title>
+	<link rel="stylesheet" href="../css/themes/default/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+	<script src="../js/jquery.js"></script>
+	<script src="../_assets/js/index.js"></script>
+	<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Oracle 函数</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p></p><br>
+    <p>单行函数
+    <p>也称标量函数，对于从表中查询的每一行，该函数都返回一个值。
+    <p>单行函数出现在 SLEECT / WHERE 子句中。
+</p><br>
+<p>1、日期函数
+<p>    对日期值进行运算，根据用途产生日期/数值类型的结果。
+<p>ADD_MONTHS(d, n)    返回 指定日期加上月数后的 日期值
+<p>MONTHS_BETWEEN(d1, d2)    返回 两个日期间的 月数
+<p>LAST_DAY(d)        返回 指定日期当前的最后一天的 日期值
+<p>RONUD(d,[fmt])        返回 指定日期四舍五入格式(YEAR、MONTH、DAY)后的 日期值
+<p>NEXT_DAY(d,day)        返回 指定日期下一个星期几的 日期值
+<p>TRUNC(d,[fnt])        返回 指定日期截断为格式后的 日期值
+<p>EXTRACT(fmt FROM d)    返回 指定日期提取的格式的 值 
+
+</p><br>
+<p>2、字符函数
+<p>    字符函数接受字符输入，并返回字符或数值。
+<p>INITCAP(char)        首字母大写
+<p>LOWER(char)        转换为小写
+<p>UPPER(char)        转换为大写
+<p>LTRIM(char, set)    左裁切
+<p>RTRIM(char, set)    右裁切
+<p>TRANSLATE(char, from, to)        按字母翻译
+<p>REPLACE(char, search_str, replace_str)    字符串替换
+<p>INSTR(char, substr[,pos])        查找子串位置
+<p>SUBSTR(char, pos, len)            取子字符串
+<p>CONCAT(char1, char2)            连接字符串
+
+<p>CHR(ascii)        根据 ASCII 码返回对应字符串
+<p>LPAD / RPAD        左 / 右 填充
+<p>    LPAD ('function', 15 , '=') 返回    '=======function'
+<p>TRAM            开头或结尾(或 开头和结尾)裁剪特定的字符，默认裁剪空格。
+<p>    TRIM ([LEADING | TRAILING] trim_char)
+<p>LENGTH(char)        返回字符串长度
+<p>DECODE            逐个值进行字符串替换
+<p>    DECODE (expr, search1, result1, search2, result2, [ ,default])
+<p>    DECODE (ostalus, 'p', '准备处理', 'c', '已完成')
+
+
+</p><br>
+<p>3、数字函数
+<p>    数字函数接受数字输入并返回数值作为输出结果。
+<p>ABS(n)        取绝对值
+<p>CEIL(n)        向上取值
+<p>FLOOR(n)    向下去整
+<p>SIN(n)        正弦值
+<p>COS(n)        余弦值
+<p>POWER(m, n)    指数函数
+<p>SQRT(n)        平方根
+<p>MOD(m, n)    取余
+<p>ROUND(m, n)    小数点后精度四舍五入
+<p>TRUNC(m, n)    小数点后精度截断
+
+</p><br>
+<p>4、转换函数
+<p>    转换函数将一种数据类型转换为另一种数据类型。
+<p>TO_CHAR (d|n, [,fmt])        格式化 日期 / 数值
+<p>TO_DATE (char [,fmt])        将 fmt模型格式的字符串 转换为日期型
+<p>TO_NUMBER (char)        将 包含数字的的字符串转换为 数值型
+
+</p><br>
+<p>5、其他函数
+<p>NVL (exp, exp2)        如果 exp 为空返回 exp2；如果非空返回 exp
+<p>NVL2 (exp, exp2, exp3)    如果 exp 为空返回 exp3；如果非空返回 exp2
+<p>NULLIF (exp1, exp2)    比较两表达式，相等返回空值，不等则返回 exp1
+
+
+
+
+</p><br>
+<p>分组函数 / 聚合函数
+<p>    分组函数基于一组行返回结果，即为每一组行返回单个值。
+
+<p>AVG (columname)         返回指定列的平均值
+<p>MAX (columname)         返回指定列的最大值
+<p>MIN (columname)         返回指定列的最小值
+<p>SUM (columname)         返回指定列的总值
+<p>COUNT    
+<p>    COUNT (*)        统计所有行个数，包括重复行和空值得行
+<p>    COUNT (columname)    统计指定列非空值的个行数
+<p>    COUNT (DISTINCR columname)    统计指定列中 非重复，非空值得行个数    
+
+</p><br>
+<p>GROUP BY 子句
+ <p>   用于将信息表划分为组，对查询结果按组进行聚合运算，为每组返回一个结果。
+<p>HAVING 子句
+ <p>   用来指定 GROUP BY 子句的检索条件。
+
+
+
+</p><br>
+<p>分析函数
+<p>    分析函数根据一组行来计算聚合值。这些函数通常用来完成对聚集的累积排名、移动平均数和报表计算。
+<p>    分析函数与聚合函数不同的是他们为每组记录返回多个行。
+
+<p>ROW_NUMBER () OVER ([PARTITION BY colum] ORDER BY colum)
+<p>    为有序组中的每一行返回一个唯一的排序值，序号由 ORDER BY 子句指定，从 1 开始，即使具有相等的值，排位也不同。
+<p>    PARTITION BY colum 按列值进行区分，各分组内在进行排序。
+
+<p>RANK () OVER ([PARTITION BY colum] ORDER BY colum)
+<p>    计算一个值在一个组中的地位，由 1 开头，具有相等值得行排位相同，序数随后跳跃相应的数值。
+
+<p>DENSE_RANK () OVER ([PARTITION BY colum] ORDER BY colum)
+ <p>   计算一个值在一个组中的地位，由 1 开头，具有相等值得行排位相同，并且排位是连续的。
+
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>广告</h4>
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+
+</body>
+</html>

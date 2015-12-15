@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Index</title>
+	<link rel="stylesheet" type="text/css" href="/jsp/common/js/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/jsp/common/js/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="/jsp/common/css/demo.css">
+	<script type="text/javascript" src="/jsp/common/js/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="/jsp/common/js/easyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+	<div class="easyui-layout" style="width:100%;height:768px;">
+		<div data-options="region:'center'">
+			<div style="float:left;padding-left: 10px;">
+				用户名:<input class="easyui-validatebox textbox" type="text" id="username" ></input>
+				域名：<input class="easyui-validatebox textbox" type="text" id="domain" ></input>
+				时间:<input class="easyui-datebox" id="alterDate_start"></input>
+				-<input class="easyui-datebox" id="alterDate_end"></input>
+				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="queryData()">查询</a>
+			</div>
+			<div style="float:right;padding-right: 10px;">
+				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="$('#adddlg').dialog('open')" >添加</a>
+				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" onclick="deleteuser()">删除</a>
+				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="update()" id="editbutton">保存</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo'" onclick="reject()">放弃</a>
+			</div>
+			<table id="datagrid" class="easyui-datagrid"
+					data-options="rownumbers:true,border:false,singleSelect:true,fit:true,fitColumns:true,onDblClickRow: onDbClickRow">
+				<thead>
+					<tr>
+						<th data-options="field:'ck',checkbox:true"></th>
+						<th data-options="field:'userid',align:'center',hidden:true"></th>
+						<th data-options="field:'username',align:'center'" width="80">用户名</th>
+						<th data-options="field:'domain',align:'center',editor:'text'" width="100">域名</th>
+						<th data-options="field:'homepage',align:'center',editor:'text'" width="100">网址</th>
+						<th data-options="field:'telphone',align:'center',editor:'text'" width="80">电话</th>
+						<th data-options="field:'qq',align:'center',editor:'text'" width="80">QQ</th>
+						<th data-options="field:'weixin',align:'center',editor:'text'" width="80">微信</th>
+						<th data-options="field:'alterDate',align:'center',formatter:function (value){
+						return '20'+(value.year+'').substring(1,3)+'-'+(value.month+1)+'-'+value.date;}" width="80">修改时间</th>
+						<th data-options="field:'alterUser',align:'center'" width="80">修改人</th>
+						
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+	<div id="adddlg" class="easyui-dialog" title="添加用户" style="width:250px;height:250px;padding:10px"
+			data-options="
+				iconCls: 'icon-add',
+				closed: true,
+				buttons: [{
+					text:'保存',
+					iconCls:'icon-save',
+					handler:function(){
+						adduser();
+					}
+				},{
+					text:'取消',
+					iconCls:'icon-cancel',
+					handler:function(){
+						$('#adddlg').dialog('close');
+					}
+				}]
+			">
+			<table>
+				<tr>
+					<td style="text-align: right;">用户名:</td><td><input class="easyui-validatebox textbox" type="text" id="addusername"  data-options="required:true"></input></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">电话:</td><td><input class="easyui-validatebox textbox" type="text" id="addtel" ></input></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">网址:</td><td><input class="easyui-validatebox textbox" type="text" id="addwebsite" ></input></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">域名:</td><td><input class="easyui-validatebox textbox" type="text" id="adddomain" ></input></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">微信:</td><td><input class="easyui-validatebox textbox" type="text" id="addweixin" ></input></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">QQ:</td><td><input class="easyui-validatebox textbox" type="text" id="addqq" ></input></td>
+				</tr>
+			</table>
+		
+	</div>
+</body>
+</html>
+<script>
+function adduser(){
+	var username=$("#addusername").val();
+	if(username==""){
+		$.messager.alert('提示',"用户名不能为空！");
+		return;
+	}else{
+		var domain=$("#adddomain").val();
+		var alterDate_start=$("#alterDate_start").val();
+		var alterDate_end=$("#alterDate_end").val();
+		$.post("http://127.0.0.1:8080/Demo/user/addoneuser.do",
+		{
+			username:username,
+			telphone:$("#addtel").val(),
+			homepage:$("#addwebsite").val(),
+			domain:$("#adddomain").val(),
+			qq:$("#addqq").val(),
+			weixin:$("#addweixin").val()
+		},
+		function(data,status){
+			//alert("Data: " + data + "\nStatus: " + status);
+			$('#adddlg').dialog('close');
+			queryData();
+		});
+		
+	}
+}
+function queryData(){
+	var username=$("#username").val();
+	var domain=$("#domain").val();
+	var alterDate_start=$("#alterDate_start").val();
+	var alterDate_end=$("#alterDate_end").val();
+	$.post("http://127.0.0.1:8080/Demo/user/selectalluser.do",
+	{
+		username:username,
+		domain:domain,
+		alterDate_start:alterDate_start,
+		alterDate_end:alterDate_end
+	},
+	function(data,status){
+		if(data==null){
+			$.messager.alert('提示',"没有查询到数据");
+		}else{
+			$("#datagrid").datagrid('loadData', data);
+		}
+	});
+}
+function deleteuser(){
+	var row = $('#datagrid').datagrid('getSelected');
+	if (row){
+		$.messager.confirm('删除用户', "确定删除"+row.username+"吗?", function(r){
+				if (r){
+					$.post("http://127.0.0.1:8080/Demo/user/deleteoneuser.do",
+					{
+						userid:row.userid
+					},
+					function(data,status){
+						//alert("Data: " + data.indexOf("success") + "\nStatus: " + status);
+						if(data.indexOf("success")>-1){
+							$.messager.alert('提示',"删除成功！");
+						}else{
+							$.messager.alert('提示',"删除失败！");
+						}
+						queryData();
+					});
+				}
+		});
+
+	}
+}
+function update(){
+	accept();
+	for(var i=0;i<editids.length;i++){
+		var row = $('#datagrid').datagrid('getData').rows[editids[i]];
+		$.post("http://127.0.0.1:8080/Demo/user/updateoneuser.do",
+		{
+			userid:row.userid,
+			telphone:row.telphone,
+			homepage:row.homepage,
+			domain:row.domain,
+			qq:row.qq,
+			weixin:row.weixin
+		},
+		function(data,status){
+			//alert("Data: " + data.indexOf("success") + "\nStatus: " + status);
+			if(data.indexOf("success")>-1){
+				//$.messager.alert('提示',"更新成功！");
+			}else{
+				//$.messager.alert('提示',"更新失败！");
+			}
+		});
+	}
+	editids=new Array();
+	queryData();
+}
+function onDbClickRow(index){
+	if (editIndex != index){
+		if (endEditing()){
+			editids.push(index);
+			$('#datagrid').datagrid('selectRow', index)
+			.datagrid('beginEdit', index);
+			editIndex = index;
+		} else {
+			$('#datagrid').datagrid('selectRow', editIndex);
+		}
+	}
+}
+function endEditing(){
+	if (editIndex == undefined){
+		return true;
+		}
+	if ($('#datagrid').datagrid('validateRow', editIndex)){
+		$('#datagrid').datagrid('endEdit', editIndex);
+		editIndex = undefined;
+		return true;
+	} else {
+		return false;
+	}
+}
+$(function(){
+	queryData();
+});
+function accept(){
+	if (endEditing()){
+		$('#datagrid').datagrid('acceptChanges');
+	}
+}
+function reject(){
+	$('#datagrid').datagrid('rejectChanges');
+	editIndex = undefined;
+}
+var editIndex = undefined;
+var editids=new Array();　
+</script>

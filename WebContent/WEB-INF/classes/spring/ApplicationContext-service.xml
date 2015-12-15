@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="userService" class="service.manage.user.UserService">
+		<property name="userMapper" ref="userMapper"/>
+		<property name="userRoleService" ref="userRoleService"/>
+	</bean>
+	<bean id="userRoleService" class="service.manage.user.UserRoleService">
+		<property name="user_roleMapper" ref="user_roleMapper"/>
+		<property name="permissionService" ref="permissionService"/>
+		<property name="rolePermissionService" ref="rolePermissionService"/>
+	</bean>
+	<bean id="vipService" class="service.manage.vip.VipService">
+		<property name="vipMapper" ref="vipMapper"/>
+	</bean>
+	<bean id="roleService" class="service.manage.permission.RoleService">
+		<property name="roleMapper" ref="roleMapper"/>
+		<property name="rolePermissionService" ref="rolePermissionService"/>
+		<property name="userRoleService" ref="userRoleService"/>
+	</bean>
+	<bean id="permissionService" class="service.manage.permission.PermissionService">
+		<property name="permissionMapper" ref="permissionMapper"/>
+		<property name="rolePermissionService" ref="rolePermissionService"/>
+	</bean>
+	<bean id="rolePermissionService" class="service.manage.permission.RolePermissionService">
+		<property name="role_permissionMapper" ref="role_permissionMapper"/>
+	</bean>
+	<bean id="ordersService" class="service.manage.orders.OrdersService">
+		<property name="ordersMapper" ref="ordersMapper"/>
+		<property name="ordermxMapper" ref="ordermxMapper"/>
+		<property name="productMapper" ref="productMapper"/>
+	</bean>
+	<bean id="productService" class="service.manage.product.ProductService">
+		<property name="productMapper" ref="productMapper"/>
+	</bean>
+	<bean id="newsService" class="service.manage.news.NewsService">
+		<property name="newsMapper" ref="newsMapper"/>
+	</bean>
+	<bean id="adsService" class="service.manage.ads.AdsService">
+		<property name="adsMapper" ref="adsMapper"/>
+	</bean>
+	
+</beans>

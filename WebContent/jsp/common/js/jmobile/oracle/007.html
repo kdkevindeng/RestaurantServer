@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="GBK">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>索引 (INDEX)</title>
+	<link rel="stylesheet" href="../css/themes/default/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+	<script src="../js/jquery.js"></script>
+	<script src="../_assets/js/index.js"></script>
+	<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>索引 (INDEX)</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p></p><br>
+
+<p>CREATE INDEX 索引名ON 表名 ( 字段1, [字段2, ……] );
+<p>ALTER INDEX 索引名 REBUILD;
+
+<p>一个表的索引最好不要超过三个 (特殊的大表除外), 最好用单字段索引, 结合SQL语句的分析执行情况, 也可以建立多字段的组合索引和基于函数的索引
+
+<p>ORACLE8.1.7字符串可以索引的最大长度为1578 单字节
+<p>ORACLE8.0.6字符串可以索引的最大长度为758 单字节
+
+<p>ORACLE DOC上说字符串最大可以建索引的长度约是:数据块的大小(db_block_size)*40%
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>广告</h4>
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+
+</body>
+</html>

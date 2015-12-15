@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="GBK">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Oracle DDL 语句</title>
+	<link rel="stylesheet" href="../css/themes/default/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+	<script src="../js/jquery.js"></script>
+	<script src="../_assets/js/index.js"></script>
+	<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Oracle DDL 语句</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<h1 style="margin-left:21.0pt;text-indent:-21.0pt;">
+	<span>一、</span><span>CREATE&nbsp;</span>
+</h1>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;">(</span><span style="font-size:9pt;font-family:宋体;">创建表</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">索引</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">视图</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">同义词</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">过程</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">函数</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">数据库链接等</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">)</span>
+</p>
+<h2 style="margin-left:21.0pt;text-indent:-21.0pt;">
+	<span>1.<span style="font-weight:normal;font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;">创建表</span><span></span>
+</h2>
+<p class="MsoNormal">
+	<span style="font-family:Arial, sans-serif;">CREATE TABLE
+region(</span><span style="font-family:Arial, sans-serif;"><br />
+<span>id number(2) NOT NULL PRIMARY KEY,</span><br />
+<span>postcode number(6) default '0' NOT NULL,</span><br />
+<span>areaname varchar2(30) default ' ' NOT NULL);</span></span>
+</p>
+<p class="MsoNormal">
+	<span>&nbsp;</span>
+</p>
+<p class="MsoNormal">
+	<b><span style="font-family:宋体;">注意事项</span><span></span></b>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:宋体;">创建表时要把较小的不为空的字段放在前面</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">可能为空的字段放在后面</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"></span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:宋体;">创建表时可以用中文的字段名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">但最好还是用英文的字段名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"></span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:宋体;">创建表时可以给字段加上默认值</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">例如</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"> DEFAULT SYSDATE</span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:宋体;">这样每次插入和修改时</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">不用程序操作这个字段都能得到动作的时间</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"></span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:宋体;">创建表时可以给字段加上约束条件，例如</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"></span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:宋体;">非空</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"> NOT NULL</span><br />
+<span style="font-size:9pt;font-family:宋体;">不允许重复<span style="font-size:9pt;font-family:Tahoma, sans-serif;"> UNIQUE</span><br />
+</span><span style="font-size:9pt;font-family:宋体;">关键字<span style="font-size:9pt;font-family:Tahoma, sans-serif;"> PRIMARY KEY</span><br />
+</span><span style="font-size:9pt;font-family:宋体;">按条件检查<span style="font-size:9pt;font-family:Tahoma, sans-serif;"> CHECK (</span><span style="font-size:9pt;">条件</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">)</span><br />
+</span><span style="font-size:9pt;font-family:宋体;">外键<span style="font-size:9pt;font-family:Tahoma, sans-serif;"> REFERENCES </span><span style="font-size:9pt;">表名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">(</span><span style="font-size:9pt;">字段名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">)</span></span>
+</p>
+<h2 style="margin-left:21.0pt;text-indent:-21.0pt;">
+	<span>2.<span style="font-weight:normal;font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;">创建索引</span><span></span>
+</h2>
+<h2 style="margin-left:21.0pt;text-indent:-21.0pt;">
+	<span>3.<span style="font-weight:normal;font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;">创建视图</span><span></span>
+</h2>
+<h2 style="margin-left:21.0pt;text-indent:-21.0pt;">
+	<span>4.<span style="font-weight:normal;font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;">创建同义词</span><span></span>
+</h2>
+<h2 style="margin-left:21.0pt;text-indent:-21.0pt;">
+	<span>5.<span style="font-weight:normal;font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;">创建存储过程</span><span></span>
+</h2>
+<h2 style="margin-left:21.0pt;text-indent:-21.0pt;">
+	<span>6.<span style="font-weight:normal;font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;">创建函数</span><span></span>
+</h2>
+<h2 style="margin-left:21.0pt;text-indent:-21.0pt;">
+	<span>7.<span style="font-weight:normal;font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;">创建数据库链接</span><span></span>
+</h2>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;"></span>
+</p>
+<h1 style="margin-left:21.0pt;text-indent:-21.0pt;">
+	<span>二、</span><span>ALTER&nbsp;</span>
+</h1>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;">(</span><span style="font-size:9pt;font-family:宋体;">改变表</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">索引</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">视图等</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">)</span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:宋体;">改变表的名称</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"></span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;">ALTER TABLE </span><span style="font-size:9pt;font-family:宋体;">表名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">1 TO </span><span style="font-size:9pt;font-family:宋体;">表名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">2;</span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:宋体;">在表的后面增加一个字段</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"></span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;">ALTER TABLE</span><span style="font-size:9pt;font-family:宋体;">表名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"> ADD </span><span style="font-size:9pt;font-family:宋体;">字段名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"> </span><span style="font-size:9pt;font-family:宋体;">字段名描述</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">;</span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:宋体;">修改表里字段的定义描述</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"></span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;">ALTER TABLE</span><span style="font-size:9pt;font-family:宋体;">表名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"> MODIFY</span><span style="font-size:9pt;font-family:宋体;">字段名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"> </span><span style="font-size:9pt;font-family:宋体;">字段名描述</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">;</span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:宋体;">给表里的字段加上约束条件</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"></span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;">ALTER TABLE </span><span style="font-size:9pt;font-family:宋体;">表名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"> ADD CONSTRAINT </span><span style="font-size:9pt;font-family:宋体;">约束名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"> PRIMARY KEY (</span><span style="font-size:9pt;font-family:宋体;">字段名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">);</span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;">ALTER TABLE </span><span style="font-size:9pt;font-family:宋体;">表名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"> ADD CONSTRAINT </span><span style="font-size:9pt;font-family:宋体;">约束名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"> UNIQUE (</span><span style="font-size:9pt;font-family:宋体;">字段名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">);</span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:宋体;">把表放在或取出数据库的内存区</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"></span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;">ALTER TABLE </span><span style="font-size:9pt;font-family:宋体;">表名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"> CACHE;</span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;">ALTER TABLE </span><span style="font-size:9pt;font-family:宋体;">表名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"> NOCACHE;</span>
+</p>
+<h1 style="margin-left:21.0pt;text-indent:-21.0pt;">
+	<span>三、</span><span>DROP&nbsp;</span>
+</h1>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;">(</span><span style="font-size:9pt;font-family:宋体;">删除表</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">索引</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">视图</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">同义词</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">过程</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">函数</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">数据库链接等</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">)</span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:宋体;">删除表和它所有的约束条件</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"></span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;">DROP TABLE </span><span style="font-size:9pt;font-family:宋体;">表名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;"> CASCADE CONSTRAINTS;</span>
+</p>
+<h1 style="margin-left:21.0pt;text-indent:-21.0pt;">
+	<span>四、</span><span>TRUNCATE&nbsp;</span>
+</h1>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;">(</span><span style="font-size:9pt;font-family:宋体;">清空表里的所有记录</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">, </span><span style="font-size:9pt;font-family:宋体;">保留表的结构</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">)</span>
+</p>
+<p class="MsoNormal" align="left">
+	<span style="font-size:9pt;font-family:Tahoma, sans-serif;">TRUNCATE </span><span style="font-size:9pt;font-family:宋体;">表名</span><span style="font-size:9pt;font-family:Tahoma, sans-serif;">;</span>
+</p>
+<p class="MsoNormal">
+	<span>&nbsp;</span>
+</p>
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>广告</h4>
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+
+</body>
+</html>

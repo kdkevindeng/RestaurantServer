@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="GBK">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Multi-page template</title>
+	<link rel="stylesheet" href="../css/themes/default/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+	<script src="../js/jquery.js"></script>
+	<script src="../_assets/js/index.js"></script>
+	<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+<div data-role="page">
+
+	<div data-role="header">
+	<h1>
+	SQL操作符
+</h1>
+<p>
+	<br />
+</p>
+<p>
+	<strong><span id="__kindeditor_bookmark_start_67__"></span>一、算术操作符</strong>
+</p>
+<p>
+	算术运算（+ - * /）
+</p>
+<p>
+	<span>算术表达式由&nbsp;NUMBER 数据类型的列名、数值常量和连接它们的算术操作符组成。</span>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<strong>二、比较操作符</strong>
+</p>
+<p>
+	用于比较两个表达式的值。
+</p>
+<p>
+	=、!=、&lt;、&gt;、&lt;=、&gt;=、BETWEEN  AND （检查是否在两个值之间）
+</p>
+<p>
+	[NOT] IN（与列表中的值匹配）
+</p>
+<p>
+	[NOT] LIKE（匹配字符模式， &nbsp;_ %通配符）
+</p>
+<p>
+	[NOT] IS NULL（检查是否为空）
+</p>
+<br />
+<p>
+	<strong>三、逻辑操作符</strong>
+</p>
+<p>
+	AND OR NOT
+</p>
+<p>
+	<span>用于组合生成</span><span>一个真或假的结果</span><span>。</span>
+</p>
+<br />
+<p>
+	<strong>四、集合操作符</strong>
+</p>
+<p>
+	集合操作符将两个查询的结果组合成一个结果集合。
+</p>
+<p>
+	UNION（联合）         返回两个查询选定不重复的行。(删除重复的行)
+</p>
+<p>
+	UNION ALL（联合所有）  合并两个查询选定的所有行，包括重复的行。
+</p>
+<p>
+	INTERSECT（交集）     只返回两个查询都有的行。
+</p>
+<p>
+	MINUS（减集）         在第一个查询结果中排除第二个查询结果中出现的行。 （第一 -- 第二）
+</p>
+<p>
+	<span style="line-height:1.5;">使用集合操作符连接起来的 SELECT 语句中的列应遵循以下规则：</span>
+</p>
+<p>
+	.通过集合操作连接的各个查询相同列数，匹配列的数据类型；
+</p>
+<p>
+	.列标题来自第一个 SELECT 语句。
+</p>
+<p>
+	SELECT orderno FROM order_master
+</p>
+<p>
+	UNION
+</p>
+<p>
+	SELECT orderno FROM order_detail;
+</p>
+<br />
+<p>
+	<strong>五、连接操作符 （||）</strong>
+</p>
+<p>
+	用于将两个或者多个字符串合并成一个字符串，或者将一个字符串与一个数值合并在一起。
+</p>
+<p>
+	SELECT ('供应商'|| venname || '的地址是' || venaddress)
+</p>
+<p>
+	FROM vendor_master<span id="__kindeditor_bookmark_end_68__"></span>
+</p>
+<p>
+	<br />
+</p>
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>广告</h4>
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+
+</body>
+</html>

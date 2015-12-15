@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="GBK">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Oracle 查询（SELECT） 语句</title>
+	<link rel="stylesheet" href="../css/themes/default/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+	<script src="../js/jquery.js"></script>
+	<script src="../_assets/js/index.js"></script>
+	<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Oracle 查询（SELECT） 语句</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p></p><br>
+<p>SELECT字段名1, 字段名2, …… FROM 表名1, [表名2, ……] WHERE 条件; 
+
+<p>字段名可以带入函数
+ <p> 例如:  COUNT(*), MIN(字段名),  MAX(字段名),  AVG(字段名), DISTINCT(字段名), 
+ <p>      TO_CHAR(DATE字段名,'YYYY-MM-DD HH24:MI:SS')
+</p><br>
+<p>NVL(EXPR1, EXPR2)函数
+<p>解释:    
+<p>IF EXPR1=NULL
+<p>        RETURN EXPR2
+<p>ELSE
+<p>               RETURN EXPR1
+</p><br><p>DECODE(AA﹐V1﹐R1﹐V2﹐R2.)函数
+<p>解释: 
+<p>IF AA=V1 THEN RETURN R1
+<p>IF AA=V2 THEN RETURN R2
+<p>..…
+<p>ELSE
+<p>RETURN NULL
+</p><br><p>LPAD(char1,n,char2)函数
+<p>解释:
+<p>字符char1按制定的位数n显示，不足的位数用char2字符串替换左边的空位
+<p>字段名之间可以进行算术运算
+<p>例如:  (字段名1*字段名1)/3
+</p><br><p>查询语句可以嵌套
+<p>例如: SELECT …… FROM 
+<p>(SELECT …… FROM表名1, [表名2, ……] WHERE 条件) WHERE 条件2;
+</p><br><p>两个查询语句的结果可以做集合操作
+<p>例如: 并集  UNION    (去掉重复记录), 
+<p>      并集  UNION ALL(不去掉重复记录), 
+<p>      差集  MINUS,  
+ <p>     交集  INTERSECT
+
+</p><br><p>分组查询
+<p>SELECT字段名1, 字段名2, …… FROM 表名1, [表名2, ……] GROUP BY字段名1 
+<p>[HAVING 条件] ;
+</p><br>
+<p>两个以上表之间的连接查询
+
+<p>SELECT 字段名1, 字段名2, …… 
+<p>FROM   表名1, [表名2, ……] 
+<p>WHERE 表名1.字段名 = 表名2. 字段名 
+<p>[ AND ……] ;
+
+<p>SELECT字段名1, 字段名2, …… 
+<p>FROM  表名1, [表名2, ……] 
+<p>WHERE 表名1.字段名 = 表名2. 字段名(+) 
+<p>[ AND ……] ;
+
+<p>有(+)号的字段位置自动补空值
+<br><p><p>查询结果集的排序操作, 默认的排序是升序ASC, 降序是DESC
+
+<p>SELECT字段名1, 字段名2, …… FROM 表名1, [表名2, ……] 
+<p>ORDER BY字段名1, 字段名2 DESC;
+</p><br><p>字符串模糊比较的方法
+
+<p>INSTR(字段名, ‘字符串’)>0    
+<p>字段名 LIKE  ‘字符串%’  [‘%字符串%’]
+
+<p>每个表都有一个隐含的字段ROWID, 它标记着记录的唯一性. 
+<br><p>
+<br><p> <p>           分组查询语句
+<p>1。组处理函数不能出现在 where 子句中
+<p>2。选择列表中的列、表达式，必须出现在 group by 子句中
+<p>3。组处理函数中可以指定 all 和 distinct
+<br><p><p>分组函数
+<p>select avg(sal)            as avg1,
+<p>       avg(distinct sal)   as avg2,
+ <p>      max(sal)            as max,
+ <p>      min(sal)            as min,
+ <p>      sum(sal)            as sum,
+ <p>      count(*)            as cnt1,
+ <p>      count(sal)          as cnt2,
+ <p>      count(distinct sal) as cnt3
+<p>from   emp
+<p>where  deptno = 30;
+
+<br><p><p>单列分组
+<p>select deptno, avg(sal), max(sal) from emp
+<p>group by deptno;
+
+<p>select deptno, avg(sal), max(sal) from emp
+<p>group by deptno
+<p>order by avg(sal);
+
+<br><p><p>多列分组
+<p>select deptno, job, avg(sal), max(sal), from emp
+<p>group by deptno, job;
+
+<br><p><p>rollup 用于生成横向统计信息
+<p>Select deptno, job, Avg(sal), Max(sal) From emp
+<p>Group By rollup(deptno,job)
+
+<br><p><p>cube  用于生产纵向统计信息
+<p>Select deptno, job, Avg(sal), Max(sal) From emp
+<p>Group By Cube(deptno,job)
+
+
+<br><p><p>             having 子句
+<p>select deptno, avg(sal), max(sal) from emp
+<p>group by deptno
+<p>having avg(sal) > 2000;
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>广告</h4>
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+
+</body>
+</html>

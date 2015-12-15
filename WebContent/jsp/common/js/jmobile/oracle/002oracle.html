@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="GBK">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Oracle 常用数据类型</title>
+	<link rel="stylesheet" href="../css/themes/default/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+	<script src="../js/jquery.js"></script>
+	<script src="../_assets/js/index.js"></script>
+	<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Oracle 常用数据类型</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p>
+	<span style="line-height:1.5;"><strong>1、字符数据类型</strong></span> 
+</p>
+<p>
+	CHAR        固定长度字符串        长度 1～2000个字节，未指定则默认为 1字节
+</p>
+<p>
+	VARCHAR2    可变长度字符串        长度 1～4000个字节，定义时必须指定大小
+</p>
+<p>
+	LONG        可变长度字符串        最多能存储 2GB，存储超过 VARCHAR2 的长文本信息
+</p>
+<p>
+	注意：
+</p>
+<p>
+	<br />
+</p>
+<ul>
+	<li>
+		<span style="line-height:1.5;">一个表中只有一列为 LONG 数据类型</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">LONG 列不能建立索引</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">存储过程不能接受 LONG 数据类型的参数</span> 
+	</li>
+</ul>
+<p>
+	<br />
+</p>
+<br />
+<p>
+	<strong>2、数值数据类型</strong> 
+</p>
+<p>
+	NUMBER 数据类型可以存储正数、负数、零、定点数(不带小数点的)和精度为38为的浮点数。
+</p>
+<p>
+	NUMBER(M,N)
+数字型M是位数总长度, N是小数的长度
+</p>
+<p>
+</p>
+<p>
+	<strong>3、时期时间数据类型</strong> 
+</p>
+<p>
+	DATE 数据类型，用于存储表中日期和时间数据。SYSDATE 函数功能就是返回当前的日期和时间。他能够存储月，年，日，世纪，时，分和秒。他典型地用来表示什么时候事情已发生或将要发生。date数据类型的问题在于他表示两个事件发生时间间隔的度量粒度是秒。
+</p>
+<p>
+	TIMESTAMP 数据类型，存储时期、时间和时区信息。SYSTIMEATAMP 功能就是返回当前日期、时间和时区。<span>TIMESTAMP 的粒度比DATE的还要小。</span> 
+</p>
+<br />
+<p>
+	<strong>4、二进制数据类型</strong> 
+</p>
+<p>
+	RAW        二进制数据或字节串    长度 1～2000 字节，定义时应指定大小，可建索引
+</p>
+<p>
+	LONG RAW     可变长度的二进制数据    最大能存储 2GB，限制等同于 LONG 数据类型
+</p>
+<br />
+<p>
+	<strong>5、LOB 数据类型</strong> 
+</p>
+<p>
+	“大对象”数据类型，最多可存储多达 4GB的信息。LOB 可以是外部的，也可以是内部的，取决于相对于数据库位置。
+</p>
+<p>
+	CLOB        Character LOB        存储大量的字符数据
+</p>
+<p>
+	BLOB        Binary LOB        存储大量的二进制对象（多媒体对象等）
+</p>
+<p>
+	BFILE        Binary FIle        能够将二进制文件存储在数据库外部的操作系统文件中
+                    BFILE 存储一个 BFILE 定位器，它指向位于服务器文件系统上的二进制文件。
+</p>
+<p>
+	ps.一个表中可以有多个 LOB 列，每个 LOB 列可以是不同的 LOB 类型。
+</p>
+<br />
+<p>
+	<strong>6、伪列</strong> 
+</p>
+<p>
+	Oracle 中的一个表列，但实际上未存储表中。可以从表中查询，但是不能插入，更新或者删除。
+</p>
+<p>
+	ROWID     返回行记录的行地址，通常情况下，ROWID 值可以唯一地标识数据库中的一行。
+</p>
+<p>
+	作用：
+</p>
+<p>
+	<br />
+</p>
+<ul>
+	<li>
+		<span style="line-height:1.5;">能最快形式访问表中的一行。</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">能显示表中的行是如何存储的。</span> 
+	</li>
+	<li>
+		<span style="line-height:1.5;">可以作为表中行的唯一标识。</span> 
+	</li>
+</ul>
+<p>
+	<br />
+</p>
+<p>
+	通过使用 ROWNUM 用户可以限制查询返回的行数(或者<strong>分页</strong>)
+</p>
+<p>
+	例：SELECT * FROM EMP WHERE ROWNUM &lt;= 10;
+</p>
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>广告</h4>
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+
+</body>
+</html>

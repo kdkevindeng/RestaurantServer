@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="GBK">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>数据库链接 (DATABASE LINK)</title>
+	<link rel="stylesheet" href="../css/themes/default/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+	<script src="../js/jquery.js"></script>
+	<script src="../_assets/js/index.js"></script>
+	<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>数据库链接 (DATABASE LINK)</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p></p><br>
+<p>CREATE DATABASE LINK数据库链接名CONNECT TO 用户名 IDENTIFIED BY 密码 USING ‘数据库连接字符串’;
+    
+<p>数据库连接字符串可以用NET8 EASY CONFIG或者直接修改TNSNAMES.ORA里定义.
+
+<p>数据库参数global_name=true时要求数据库链接名称跟远端数据库名称一样
+
+<p>数据库全局名称可以用以下命令查出
+<p>SELECT * FROM GLOBAL_NAME;
+
+<p>查询远端数据库里的表
+<p>SELECT …… FROM 表名@数据库链接名;
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>广告</h4>
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+
+</body>
+</html>

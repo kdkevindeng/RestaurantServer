@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Index</title>
+	<link rel="stylesheet" type="text/css" href="/jsp/common/js/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/jsp/common/js/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="/jsp/common/css/demo.css">
+	<script type="text/javascript" src="/jsp/common/js/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="/jsp/common/js/easyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+	<div class="easyui-layout" style="width:100%;height:768px;">
+		<div data-options="region:'center',title:''">
+			<div style="float:right;padding-right: 10px;">
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" onclick="tablemode()">列表树</a>
+			</div>
+			<br>
+			<br>
+			<div style="float:none;padding:5px;width:100%;height:600px">
+				<ul id="tt" class="easyui-tree" data-options="
+				url: 'http://127.0.0.1:8080/Demo/permission/selectalltrees.do',
+				method: 'get',
+				animate: true,
+				dnd:true,
+				onContextMenu: function(e,node){
+					e.preventDefault();
+					$(this).tree('select',node.target);
+					$('#mm').menu('show',{
+						left: e.pageX,
+						top: e.pageY
+					});
+				},
+				onBeforeDrop:function(target, source, point){
+					if(point=='append'){
+						var node=$(this).tree('getNode', target);
+						return updatedrag(source.id,node.id);
+						
+
+					}else{
+						return false;
+					}
+				}
+				"></ul>
+		</div>
+	<div id="mm" class="easyui-menu" style="width:120px;">
+		<div onclick="openadd()" data-options="iconCls:'icon-add'">添加</div>
+		<div onclick="deletepermission()" data-options="iconCls:'icon-remove'">删除</div>
+		<div onclick="openedit()" data-options="iconCls:'icon-ok'">修改</div>
+	</div>
+
+	<div id="adddlg" class="easyui-dialog" title="权限" style="width:250px;height:250px;padding:10px"
+			data-options="
+				iconCls: 'icon-add',
+				closed: true,
+				buttons: '#dlg-buttons'
+			">
+			<table>
+				<tr>
+					<td style="text-align: right;">权限名:</td><td><input class="easyui-validatebox textbox" type="text" id="addpermissionname"  data-options="required:true"></input></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">父节点:</td><td> 
+					<input id="parentcode" class="easyui-combotree" data-options="url:'http://127.0.0.1:8080/Demo/permission/selectalltrees.do',method:'get',required:true"></input></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">URL:</td><td><input class="easyui-validatebox textbox" type="text" id="url" ></input></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">是否可用:</td><td><select  id="isuse" >
+					<option value="1" selected>启用</option>
+					<option value="0">弃用</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">备注:</td><td><input class="easyui-validatebox textbox" type="text" id="beizhu" ></input></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">描述:</td><td><input class="easyui-validatebox textbox" type="text" id="miaoshu" ></input></td>
+				</tr>
+			</table>
+		
+	</div>
+	
+	<div id="dlg-buttons">
+		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'"  id ="addsave" >保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="javascript:$('#adddlg').dialog('close');">取消</a>
+	</div>
+	
+
+		
+	</div>
+</body>
+</html>
+<script>
+function onContextMenu(e,row){
+	e.preventDefault();
+	$(this).tree('select', row.id);
+	$('#mm').menu('show',{
+		left: e.pageX,
+		top: e.pageY
+	});
+}
+function openadd(){
+	$("#addsave").unbind('click');
+	$("#addsave").click(function(){addpermission();});
+	var row = $('#tt').tree('getSelected');
+	alert(row.id);
+	$('#parentcode').combotree('setValue', row.id);
+	$('#adddlg').dialog('open');
+}
+function openedit(){
+	$("#addsave").unbind('click');
+	$("#addsave").click(function(){updatepermission();});
+	var row = $('#tt').tree('getSelected');
+	$('#addpermissionname').val(row.text);
+	$('#url').val(row.url);
+	$('#beizhu').val(row.beizhu);
+	$('#miaoshu').val(row.describes);
+	$('#parentcode').combotree('setValue', row.parentcode);
+	$('#adddlg').dialog('open');
+
+}
+function addpermission(){
+	//alert($("#parentcode").combotree('getValues')+"");
+	var permissionname=$("#addpermissionname").val();
+	if(permissionname==""){
+		$.messager.alert('提示',"权限名不能为空！");
+		return;
+	}else{
+		$.post("http://127.0.0.1:8080/Demo/permission/addonepermission.do",
+		{
+			permissionMc:permissionname,
+			url:$("#url").val(),
+			beizhu:$("#beizhu").val(),
+			parentcode:$("#parentcode").combotree('getValues')+"",
+			describes:$("#miaoshu").val()
+		},
+		function(data,status){
+			//alert("Data: " + data + "\nStatus: " + status);
+			//$('#adddlg').dialog('close');
+			//queryData();
+		});
+		
+	}
+	$('#adddlg').dialog('close');
+	$('#tt').tree('reload');   
+}
+function deletepermission(){
+	var row = $('#tt').tree('getSelected');
+	if (row){
+		$.messager.confirm('删除权限', "确定删除"+row.text+"吗?", function(r){
+				if (r){
+					$.post("http://127.0.0.1:8080/Demo/permission/deleteonepermission.do",
+					{
+						permissionDm:row.id
+					},
+					function(data,status){
+						//alert("Data: " + data.indexOf("success") + "\nStatus: " + status);
+						if(data.indexOf("success")>-1){
+							alert("删除成功！");
+						}else{
+							alert("删除失败！");
+						}
+						$('#tt').tree('reload');
+					});
+				}
+		});
+
+	} 
+}
+function updatepermission(){
+	alert($("#isuse").val());
+	var row = $('#tt').tree('getSelected');
+	var permissionname=$("#addpermissionname").val();
+	if(permissionname==""){
+		$.messager.alert('提示',"权限名不能为空！");
+		return;
+	}else{
+		$.post("http://127.0.0.1:8080/Demo/permission/updateonepermission.do",
+		{
+			permissionDm:row.id,
+			permissionMc:permissionname,
+			url:$("#url").val(),
+			beizhu:$("#beizhu").val(),
+			isuse:$("#isuse").val(),
+			parentcode:$("#parentcode").combotree('getValues')+"",
+			describes:$("#miaoshu").val()
+		},
+		function(data,status){
+			//alert("Data: " + data.indexOf("success") + "\nStatus: " + status);
+			if(data.indexOf("success")>-1){
+				//$.messager.alert('提示',"更新成功！");
+			}else{
+				//$.messager.alert('提示',"更新失败！");
+			}
+		});
+		
+	}
+	$('#adddlg').dialog('close');
+	$('#tt').tree('reload'); 
+}
+
+function updatedrag(id,parentid){
+		$.post("http://127.0.0.1:8080/Demo/permission/updateonepermission.do",
+		{
+			permissionDm:id,
+			parentcode:parentid
+		},
+		function(data,status){
+			//alert("Data: " + data.indexOf("success") + "\nStatus: " + status);
+			if(data.indexOf("success")>-1){
+				return true;
+				//$.messager.alert('提示',"更新成功！");
+			}else{
+				return false;
+				//$.messager.alert('提示',"更新失败！");
+			}
+		});
+}
+function tablemode(){
+	document.location.href="permissionmanage.html";
+}　
+</script>

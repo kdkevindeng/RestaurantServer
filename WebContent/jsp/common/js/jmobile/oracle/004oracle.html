@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="GBK">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Oracle DML 语句</title>
+	<link rel="stylesheet" href="../css/themes/default/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+	<script src="../js/jquery.js"></script>
+	<script src="../_assets/js/index.js"></script>
+	<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Oracle DML 语句</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p>
+	1.INSERT  (往数据表里插入记录的语句)
+</p>
+<p>
+	INSERT INTO 表名(字段名1, 字段名2, ……) VALUES ( 值1, 值2, ……);
+</p>
+<p>
+	INSERT INTO 表名(字段名1, 字段名2, ……)  SELECT 字段名1, 字段名2, …… FROM 另外的表名;
+</p>
+<p>
+	INSERT时如果要用到从1开始自动增长的序列号, 应该先建立一个序列号
+</p>
+<p>
+	INSERT 语句插入这个字段值为: 序列号的名称.NEXTVAL
+</p>
+<p>
+	oracle 批量插入：
+</p>
+<p>
+	insert into tableName(col1, col2, col3) &nbsp;<br />
+select '第一行第一列值'， '第二列值'， '第三列值' from dual &nbsp;union&nbsp;<br />
+select '&nbsp;第二行第一列值&nbsp;'， '第二列值'， '第三列值'&nbsp;&nbsp;from dual &nbsp;union&nbsp;<br />
+select '&nbsp;第三行第一列值&nbsp;'， '第二列值'， '第三列值'&nbsp;&nbsp;from dual;
+</p>
+<p>
+	<br />
+</p>
+<p>
+	2.DELETE  (删除数据表里记录的语句)
+</p>
+<p>
+	DELETE FROM表名 WHERE 条件;
+</p>
+<p>
+	注意：删除记录并不能释放ORACLE里被占用的数据块表空间. 它只把那些被删除的数据块标成unused.
+</p>
+<p>
+	如果确实要删除一个大表里的全部记录, 可以用 TRUNCATE 命令, 它可以释放占用的数据块表空间
+</p>
+<p>
+	TRUNCATE TABLE 表名;
+</p>
+<p>
+	此操作不可回退.
+</p>
+<br />
+<p>
+	3.UPDATE  (修改数据表里记录的语句)
+</p>
+<p>
+	UPDATE表名 SET 字段名1=值1, 字段名2=值2, …… WHERE 条件;
+</p>
+<p>
+	如果修改的值N没有赋值或定义时, 将把原来的记录内容清为NULL, 最好在修改前进行非空校验;
+</p>
+<br />
+<p>
+	注意事项:
+</p>
+<p>
+	A.    以上SQL语句对表都加上了行级锁,
+</p>
+<p>
+	确认完成后, 必须加上事物处理结束的命令 COMMIT 才能正式生效,
+</p>
+<p>
+	否则改变不一定写入数据库里.
+</p>
+<p>
+	如果想撤回这些操作, 可以用命令 ROLLBACK 复原.
+</p>
+<p>
+	B.    在运行INSERT, DELETE 和 UPDATE 语句前最好估算一下可能操作的记录范围,
+</p>
+<p>
+	应该把它限定在较小 (一万条记录) 范围内,. 否则ORACLE处理这个事务用到很大的回退段.
+</p>
+<p>
+	程序响应慢甚至失去响应. 如果记录数上十万以上这些操作, 可以把这些SQL语句分段分次完成,
+</p>
+<p>
+	其间加上COMMIT 确认事物处理.
+</p>
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>广告</h4>
+	</div><!-- /footer -->
+
+</div><!-- /page -->
+
+</body>
+</html>

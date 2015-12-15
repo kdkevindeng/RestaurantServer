@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+<script type="text/javascript" src="md5-min.js"/>
+
+</head>
+
+ <body>
+	<input id="pass" type="password" name="">
+	<input type="button" value="blank" onclick="alert(document.getElementById('pass').value)">
+	<input type="button" value="md5" onclick="alert(hex_md5(document.getElementById('pass').value))">
+	<input type="button" value="sha1" onclick="alert(hex_sha1(document.getElementById('pass').value))">
+
+ </body>
+</html>

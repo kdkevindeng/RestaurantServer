@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<context id="context1">
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="false" />
+		</commentGenerator>
+		<!--oracle数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+
+		<!-- <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:orcl" 
+			userId="restaurant"
+			password="restaurant" /> -->
+
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" 
+		    connectionURL="jdbc:mysql://127.0.0.1:3306/restruant" 
+			userId="root" 
+			password="root" />
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL 和 
+			NUMERIC 类型解析为java.math.BigDecimal -->
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- targetProject:自动生成代码的位置 -->
+		<javaModelGenerator targetPackage="dao.mybatis.model"
+			targetProject="RestaurantServer">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="dao.mybatis.mysql.xml"
+			targetProject="RestaurantServer">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="dao.mybatis.mapper" targetProject="RestaurantServer">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		<!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
+			<table schema="restaurant" tableName="ads" 				domainObjectName="Ads" /> 
+			<table schema="restaurant" tableName="news" 			domainObjectName="News" /> 
+			<table schema="restaurant" tableName="permission" 		domainObjectName="Permission" /> 
+			<table schema="restaurant" tableName="product" 			domainObjectName="Product" /> 
+			<table schema="restaurant" tableName="role" 			domainObjectName="Role" /> 
+			<table schema="restaurant" tableName="role_permission" 	domainObjectName="Role_permission" /> 
+			<table schema="restaurant" tableName="stru" 			domainObjectName="Stru" /> 
+			<table schema="restaurant" tableName="users" 			domainObjectName="User" /> 
+			<table schema="restaurant" tableName="user_role" 		domainObjectName="User_role" /> 
+			<table schema="restaurant" tableName="vip" 				domainObjectName="Vip" /> 
+			<table schema="restaurant" tableName="role_permission" 	domainObjectName="Role_permission" /> 
+			<table schema="restaurant" tableName="orders" 			domainObjectName="Orders" />
+		    <table schema="restaurant" tableName="ordermx" 			domainObjectName="Ordermx" />
+	</context>
+</generatorConfiguration>

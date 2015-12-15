@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!-- typeAliases 为java类型命名短名字 -->
+<!-- 	<typeAliases>
+
+		<typeAlias type="dao.mybatis.model.Ads" alias="Ads"/>
+		<typeAlias type="dao.mybatis.model.News" alias="News"/>
+		<typeAlias type="dao.mybatis.model.Orders" alias="Orders"/>
+		<typeAlias type="dao.mybatis.model.Ordermx" alias="Ordermx"/>
+		<typeAlias type="dao.mybatis.model.Permission" alias="Permission"/>
+		<typeAlias type="dao.mybatis.model.Product" alias="Product"/>
+		<typeAlias type="dao.mybatis.model.Role_permission" alias="Role_permission"/>
+		<typeAlias type="dao.mybatis.model.Role" alias="Role"/>
+		<typeAlias type="dao.mybatis.model.Stru" alias="Stru"/>
+		<typeAlias type="dao.mybatis.model.User_role" alias="User_role"/>
+		<typeAlias type="dao.mybatis.model.User" alias="User"/>
+		<typeAlias type="dao.mybatis.model.Vip" alias="Vip"/>
+	</typeAliases> -->
+	
+	
+	
+	<mappers>
+	 	<!-- mysql对应的mapper -->
+		<!-- <mapper resource="dao/mybatis/mysql/xml/AdsMapper.xml"/>
+		<mapper resource="dao/mybatis/mysql/xml/NewsMapper.xml"/>
+		<mapper resource="dao/mybatis/mysql/xml/OrdersMapper.xml"/>
+		<mapper resource="dao/mybatis/mysql/xml/OrdermxMapper.xml"/>
+		<mapper resource="dao/mybatis/mysql/xml/PermissionMapper.xml"/>
+		<mapper resource="dao/mybatis/mysql/xml/ProductMapper.xml"/>
+		<mapper resource="dao/mybatis/mysql/xml/Role_permissionMapper.xml"/>
+		<mapper resource="dao/mybatis/mysql/xml/RoleMapper.xml"/>
+		<mapper resource="dao/mybatis/mysql/xml/StruMapper.xml"/>
+		<mapper resource="dao/mybatis/mysql/xml/User_roleMapper.xml"/>
+		<mapper resource="dao/mybatis/mysql/xml/UserMapper.xml"/>
+		<mapper resource="dao/mybatis/mysql/xml/VipMapper.xml"/> -->
+	 	<!-- oracle对应的mapper -->
+		<mapper resource="dao/mybatis/oracle/xml/AdsMapper.xml"/>
+		<mapper resource="dao/mybatis/oracle/xml/NewsMapper.xml"/>
+		<mapper resource="dao/mybatis/oracle/xml/OrdersMapper.xml"/>
+		<mapper resource="dao/mybatis/oracle/xml/OrdermxMapper.xml"/>
+		<mapper resource="dao/mybatis/oracle/xml/PermissionMapper.xml"/>
+		<mapper resource="dao/mybatis/oracle/xml/ProductMapper.xml"/>
+		<mapper resource="dao/mybatis/oracle/xml/Role_permissionMapper.xml"/>
+		<mapper resource="dao/mybatis/oracle/xml/RoleMapper.xml"/>
+		<mapper resource="dao/mybatis/oracle/xml/StruMapper.xml"/>
+		<mapper resource="dao/mybatis/oracle/xml/User_roleMapper.xml"/>
+		<mapper resource="dao/mybatis/oracle/xml/UserMapper.xml"/>
+		<mapper resource="dao/mybatis/oracle/xml/VipMapper.xml"/>
+	</mappers>
+	
+</configuration>
